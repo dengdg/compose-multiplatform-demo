@@ -64,6 +64,19 @@ tasks.register<Exec>("build Mac app") {
     )
 }
 ```
+4. 将app文件打包成dmg
+- /path/to/temp/folder: /是我们之前复制应用程序和其他文件的临时目录，
+- MyApp: 是dmg镜像的名称，
+- UDZO: 是dmg的格式，
+- -ov表示覆盖输出文件（如果存在的话），
+- zlib-level=9表示使用最高压缩级别。
+```
+hdiutil create -srcfolder /path/output -volname compose-demo -format UDZO -ov -imagekey zlib-level=9 /path/output/compose-demo.dmg
+```
+5. 设备dmg背景
+```
+hdiutil detach /Volumes/MyApp/
+```
 
 其他参考地址：
 > conveyor地址：https://conveyor.hydraulic.dev/13.1/
