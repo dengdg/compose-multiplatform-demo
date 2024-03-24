@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.example"
-version = "1.1"
+version = "1.3"
 
 repositories {
     mavenCentral()
@@ -94,5 +94,19 @@ tasks.register<Exec>("conveyorMakeSite") {
     group = "conveyor build"
     commandLine("conveyor make site")
 }
+
+tasks.register<Exec>("conveyorMakeCopiedSite") {
+    group = "conveyor build"
+
+    // 定义该Task的依赖关系，每次打包前先执行clean、build操作（非必须操作）
+    dependsOn("clean")
+    dependsOn("build")
+    // 定义依赖执行顺序
+    // build任务必须在clean任务之后执行
+    tasks.findByName("build")?.mustRunAfter("clean")
+
+    commandLine("conveyor", "--conf-dir=$projectDir", "make", "copied-site")
+}
+
 
 

@@ -89,7 +89,7 @@ fun tabDemo() {
 
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = "Text Tab ${state + 1} selected.",
+            text = ">Text Tab ${state + 1} selected.<",
         )
 
     }
